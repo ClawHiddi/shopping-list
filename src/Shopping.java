@@ -6,6 +6,7 @@ public static void main(String[] args) {
     System.out.println("Вас приветствует список покупок!");
 
     ArrayList<String> shoppingList = new ArrayList<>();
+    int productCount = 0;
 
     Scanner scanner = new Scanner(System.in);
 
@@ -35,7 +36,8 @@ public static void main(String[] args) {
 
             if (!isDuplicateProduct) {
                 shoppingList.add(productName);
-                System.out.println("Товар добавлен в список.");
+                productCount++;
+                System.out.println("Товар " + productName + " добавлен в список под номером " + productCount + ".");
             }
 
         } else if (actionNumber == 2) {
@@ -44,7 +46,7 @@ public static void main(String[] args) {
                 System.out.println("Список покупок пуст. Пожалуйста, добавьте покупки.");
             } else {
                 for (int i = 0; i < shoppingList.size(); i++) {
-                    System.out.println("Под номером " + (i + 1) + " находится товар - " + shoppingList.get(i));
+                    System.out.println("Под номером " + (i + 1) + " находится товар - " + shoppingList.get(i) + ".");
                 }
             }
 
@@ -54,6 +56,7 @@ public static void main(String[] args) {
                 System.out.println("Список покупок пуст. Очистка не требуется.");
             } else {
                 shoppingList.clear();
+                productCount = 0;
                 System.out.println("Список покупок очищен.");
             }
 
