@@ -21,7 +21,7 @@ public static void main(String[] args) {
 
         if (actionNumber == 1) {
 
-            System.out.println("Введите название товара:");
+            System.out.println("Введите название товара без прбелов:");
             String productName = scanner.next();
             boolean isDuplicateProduct = false;
 
