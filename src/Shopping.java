@@ -1,64 +1,69 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Shopping {
-    public static void main(String[] args) {
+public static void main(String[] args) {
 
-        System.out.println("Вас приветствует список покупок!");
+    System.out.println("Вас приветствует список покупок!");
 
-        String[] shoppingList = new String[8];
-        int productCount = 0;
+    ArrayList<String> shoppingList = new ArrayList<>();
 
-        Scanner scanner = new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in);
 
-        while (true) {
-            System.out.println("Выберите одну из команд:");
-            System.out.println("1. Добавить товар в список");
-            System.out.println("2. Показать список");
-            System.out.println("3. Очистить список");
-            System.out.println("4. Завершить работу");
+    while (true) {
 
-            int actionNumber = scanner.nextInt();
+        System.out.println("Выберите одну из команд:");
+        System.out.println("1. Добавить товар в список");
+        System.out.println("2. Показать список");
+        System.out.println("3. Очистить список");
+        System.out.println("4. Завершить работу");
 
-            if (actionNumber == 1) {
-                if (productCount > 7) {
-                    System.out.println("Список полон! Пожалуйста, отложите покупку до следующего похода в магазин");
-                } else {
-                    System.out.println("Введите название товара:");
-                    String productName = scanner.next();
+        int actionNumber = scanner.nextInt();
 
-                    for (int i = 0; i < shoppingList.length; i++) {
-                        if (shoppingList[i] == null) {
-                            shoppingList[i] = productName;
-                            productCount++;
-                            System.out.println("Товар " + productName + " добавлен в список");
-                            break;
-                        }
-                    }
-                }//код из первого блока
-            } else if (actionNumber == 2) {
-                if (productCount == 0) {
-                    System.out.println("Список покупок пуст");
-                } else {
-                    for (int i = 0; i < shoppingList.length; i++) {
-                        if (shoppingList[i] == null) {
-                            break;
-                        } else {
-                            System.out.println("Под номером " + (i + 1) + " находится товар - " + shoppingList[i]);
-                        }
-                    }
-                }//код из второго блока
-            } else if (actionNumber == 3) {
-                for (int i = 0; i < shoppingList.length; i++) {
-                    shoppingList[i] = null;
-                    productCount = 0;
+        if (actionNumber == 1) {
+
+            System.out.println("Введите название товара:");
+            String productName = scanner.next();
+            boolean isDuplicateProduct = false;
+
+            for (int i = 0; i < shoppingList.size(); i++) {
+                if (productName.equals(shoppingList.get(i))) {
+                    System.out.println("Данный товар уже присутствует в списке.");
+                    isDuplicateProduct = true;
+                    break;
                 }
-                System.out.println("Список покупок очищен");//код из третьего блока
-            } else if (actionNumber == 4) {
-                System.out.println("До новых встреч!");
-                break;//код из четвёртого блока
-            } else {
-                System.out.println("Извините, такой команды нет. Введите значение от 1 до 4");//обработка неверной команды
             }
+
+            if (!isDuplicateProduct) {
+                shoppingList.add(productName);
+                System.out.println("Товар добавлен в список.");
+            }
+
+        } else if (actionNumber == 2) {
+
+            if (shoppingList.isEmpty()) {
+                System.out.println("Список покупок пуст. Пожалуйста, добавьте покупки.");
+            } else {
+                for (int i = 0; i < shoppingList.size(); i++) {
+                    System.out.println("Под номером " + (i + 1) + " находится товар - " + shoppingList.get(i));
+                }
+            }
+
+        } else if (actionNumber == 3) {
+
+            if (shoppingList.isEmpty()) {
+                System.out.println("Список покупок пуст. Очистка не требуется.");
+            } else {
+                shoppingList.clear();
+                System.out.println("Список покупок очищен.");
+            }
+
+        } else if (actionNumber == 4) {
+
+            System.out.println("До новых встреч!");
+            break;
+
+        } else {
+            System.out.println("Извините, такой команды нет. Выберите значение от 1 до 4.");
         }
     }
 }
